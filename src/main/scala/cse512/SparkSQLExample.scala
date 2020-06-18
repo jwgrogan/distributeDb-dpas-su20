@@ -89,7 +89,31 @@ object SparkSQLExample {
 
   private def ST_Contains(pointString: String, queryRectangle: String): Boolean =
   {
+    // get point longitude and latitude
+    val point = pointString.split(",")
+    val pointLon = point(0).toDouble
+    val pointLat = point(1).toDouble
 
+    // get rectangle points
+    val rectPoints = queryRectangle.split(",")
+    val upperLeft = rectPoints.slice(0, 2)
+    val upperLeftLon = upperLeft(0).toDouble
+    val upperLeftLat = upperLeft(1).toDouble
+
+    val lowerRight = rectPoints.slice(2, 4)
+    val lowerRightLon = lowerRight(0).toDouble
+    val lowerRightLat = lowerRight(1).toDouble
+
+    // check longitude
+    if (upperLeftLon <= pointLon && lowerRightLon >= pointLon)
+    {
+      // check latitude
+      if (upperLeftLat >= pointLat && lowerRightLat <= pointLat)
+      {
+        return true
+      }
+    }
+    return false
   }
 
   private def ST_Within(pointString1: String, pointString2: String, distance: Double): Boolean =

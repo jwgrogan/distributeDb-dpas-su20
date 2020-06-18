@@ -2,6 +2,7 @@ package cse512
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.{SaveMode, SparkSession}
+import scala.math.{sqrt, pow}
 
 object SparkSQLExample {
 
@@ -118,7 +119,26 @@ object SparkSQLExample {
 
   private def ST_Within(pointString1: String, pointString2: String, distance: Double): Boolean =
   {
+    // Split the string into an array
+    val p1 = pointString1.split(",")
+    val p2 = pointString2.split(",")
 
+    // Convert string array to double array
+    p1.map(_.toDouble)
+    p2.map(_.toDouble)
+
+    // Calculate euclidean distance between the two points
+    val ourDistance = sqrt(pow(p1(0) - p2(0), 2) + pow(p1(1) - p2(1), 2))
+
+    // Check if the points are within the supplied distance
+    if (ourDistance <= distance)
+    {
+      return true
+    }
+
+    return false
   }
+
+
 
 }

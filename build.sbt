@@ -17,9 +17,14 @@ lazy val root = (project in file(".")).
   )
 
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % "2.2.0" % "compile",
-  "org.apache.spark" %% "spark-sql" % "2.2.0" % "compile",
+  "org.apache.spark" %% "spark-core" % "2.2.0" % "provided",
+  "org.apache.spark" %% "spark-sql" % "2.2.0" % "provided",
   "org.scalatest" %% "scalatest" % "2.2.4" % "test",
   "org.specs2" %% "specs2-core" % "2.4.16" % "test",
   "org.specs2" %% "specs2-junit" % "2.4.16" % "test"
 )
+
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+  case x => MergeStrategy.first
+}

@@ -98,15 +98,27 @@ object SparkSQLExample {
     // get rectangle points
     val rectPoints = queryRectangle.split(",")
     val upperLeft = rectPoints.slice(0, 2)
-    val upperLeftLon = upperLeft(0).toDouble
-    val upperLeftLat = upperLeft(1).toDouble
+    var upperLeftLon = upperLeft(0).toDouble
+    var upperLeftLat = upperLeft(1).toDouble
 
     val lowerRight = rectPoints.slice(2, 4)
-    val lowerRightLon = lowerRight(0).toDouble
-    val lowerRightLat = lowerRight(1).toDouble
+    var lowerRightLon = lowerRight(0).toDouble
+    var lowerRightLat = lowerRight(1).toDouble
+
+    // Make sure upper values are larger than lower values
+    if (upperLeftLon < lowerRightLon)
+    {
+      upperLeftLon = lowerRightLon
+      lowerRightLon = upperLeft(0).toDouble
+    }
+    if (upperLeftLat < lowerRightLat)
+    {
+      upperLeftLat = lowerRightLat
+      lowerRightLat = upperLeft(1).toDouble
+    }
 
     // check longitude
-    if (upperLeftLon <= pointLon && lowerRightLon >= pointLon)
+    if (upperLeftLon >= pointLon && lowerRightLon <= pointLon)
     {
       // check latitude
       if (upperLeftLat >= pointLat && lowerRightLat <= pointLat)

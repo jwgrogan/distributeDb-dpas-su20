@@ -88,7 +88,7 @@ object SparkSQLExample {
     resultDf.write.mode(SaveMode.Overwrite).csv(outputPath)
   }
 
-  private def ST_Contains(pointString: String, queryRectangle: String): Boolean =
+  val ST_Contains = (queryRectangle:String, pointString:String) =>
   {
     // get point longitude and latitude
     val point = pointString.split(",")
@@ -111,13 +111,20 @@ object SparkSQLExample {
       // check latitude
       if (upperLeftLat >= pointLat && lowerRightLat <= pointLat)
       {
-        return true
+        true
+      }
+      else
+      {
+        false
       }
     }
-    return false
+    else
+    {
+      false
+    }
   }
 
-  private def ST_Within(pointString1: String, pointString2: String, distance: Double): Boolean =
+  val ST_Within = (pointString1: String, pointString2: String, distance: Double) =>
   {
     // Split the string into an array
     val p1 = pointString1.split(",")
@@ -135,10 +142,12 @@ object SparkSQLExample {
     // Check if the points are within the supplied distance
     if (ourDistance <= distance)
     {
-      return true
+      true
     }
-
-    return false
+    else
+    {
+      false
+    }
   }
 
 

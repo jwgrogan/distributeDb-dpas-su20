@@ -14,7 +14,7 @@ object SparkSQLExample {
     val spark = SparkSession
       .builder()
       .appName("CSE512-Phase2")
-      .config("spark.some.config.option", "some-value")//.master("local[*]")
+      .config("spark.some.config.option", "some-value").master("local[*]")
       .getOrCreate()
 
     paramsParser(spark, args)
@@ -85,6 +85,16 @@ object SparkSQLExample {
     import spark.implicits._
     val resultDf = Seq(queryName, queryResult.toString).toDF()
     resultDf.write.mode(SaveMode.Overwrite).csv(outputPath)
+  }
+
+  private def ST_Contains(pointString: String, queryRectangle: String): Boolean =
+  {
+
+  }
+
+  private def ST_Within(pointString1: String, pointString2: String, distance: Double): Boolean =
+  {
+
   }
 
 }

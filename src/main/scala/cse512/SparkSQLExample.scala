@@ -124,11 +124,13 @@ object SparkSQLExample {
     val p2 = pointString2.split(",")
 
     // Convert string array to double array
-    p1.map(_.toDouble)
-    p2.map(_.toDouble)
+    val p1lat = p1(0).toDouble
+    val p1Lon = p1(1).toDouble
+    val p2Lat = p2(0).toDouble
+    val p2Lon = p2(1).toDouble
 
     // Calculate euclidean distance between the two points
-    val ourDistance = sqrt(pow(p1(0) - p2(0), 2) + pow(p1(1) - p2(1), 2))
+    val ourDistance = sqrt(pow(p1lat - p2Lat, 2) + pow(p1Lon - p2Lon, 2))
 
     // Check if the points are within the supplied distance
     if (ourDistance <= distance)

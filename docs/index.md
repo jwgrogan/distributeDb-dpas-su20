@@ -1,4 +1,5 @@
-# Distributed Db - CSE 511 Term Project
-## Will Cray, Craig Manning, Jake Grogan
+# Distributed Database using Scala and Apache Spark
 
 [test link](https://jwgrogan.github.io/distributeDb-dpas-su20/test.md)
+
+[Documentation]()

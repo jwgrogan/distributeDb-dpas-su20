@@ -10,13 +10,15 @@ An overview of the entire project describing the general purpose of the system w
 
 This project encompasses a distributed database built on Scala and Apache Spark. The purpose of this database is two fold as described below.
 
-1. Build [Spark SQL](https://jwgrogan.github.io/distributeDb-dpas-su20/docs/spark-sql-pdf.pdf) functionality to support the following:
-  - **Range queries:** given a rectangle _R_ covering a certain latitude and longitude and a set of points _*P*_, find all the points within _R_
-  - **Range join queries:** given a set of rectangles _*R*_ covering a certain latitude and longitude and a set of points _*P*_, find all the _(r<sub>i</sub>,s<sub>j</sub>)_ pairs such that the point is within the rectangle
+1. Build [Spark SQL](spark-sql-pdf.pdf) functionality to support the following:
+  - **Range queries:** given a rectangle _R_ covering a certain latitude and longitude and a set of points _**P**_, find all the points within _R_
+  - **Range join queries:** given a set of rectangles _**R**_ covering a certain latitude and longitude and a set of points _*P*_, find all the _(r<sub>i</sub>,s<sub>j</sub>)_ pairs such that the point is within the rectangle
   - **Distance queries:** given a point location _P_ and distance _D_ in km, find all points thatlie within the distance _D_ from _P_
-  - **Distance join queries:** given two sets of points _*P<sub>1</sub>*_ and _*P<sub>2</sub>*_ and a distance _D_ in km, find all pairs _(p<sub>1i</sub>,p<sub>2j</sub>)_ such that _p<sub>1i</sub>_ is within distance _D_ of _p<sub>2j</sub>_
+  - **Distance join queries:** given two sets of points _**P<sub>1</sub>**_ and _**P<sub>2</sub>**_ and a distance _D_ in km, find all pairs _(p<sub>1i</sub>,p<sub>2j</sub>)_ such that _p<sub>1i</sub>_ is within distance _D_ of _p<sub>2j</sub>_
   
-2. [Hotspot Analysis](https://jwgrogan.github.io/distributeDb-dpas-su20/docs/hotspot-analysis-pdf.pdf)
+  
+2. Conduct [Hotspot Analysis](hotspot-analysis-pdf.pdf) to perform a range join operation on a rectangle datasets and a point dataset. For each rectangle, the number of points located within the rectangle will be obtained. The hotter rectangle means that it includes more points. So this task is to calculate the hotness of all the rectangles.
+
 
 ## Inputs
 Documentation for every input and output used in the system. Each document should accompany each design and explain the purpose and use of each form.

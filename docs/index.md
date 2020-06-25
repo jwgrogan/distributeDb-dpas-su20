@@ -6,8 +6,6 @@
 [Documentation]()
 
 ## Overview
-An overview of the entire project describing the general purpose of the system with the relevant information.
-
 This project encompasses a distributed database built on Scala and Apache Spark. The purpose of this database is two fold as described below.
 
 1. Build [Spark SQL](spark-sql-pdf.pdf) functionality to support the following:
@@ -19,9 +17,15 @@ This project encompasses a distributed database built on Scala and Apache Spark.
   
 2. Conduct [Hotspot Analysis](hotspot-analysis-pdf.pdf) to perform a range join operation on a rectangle datasets and a point dataset. For each rectangle, the number of points located within the rectangle will be obtained. The hotter rectangle means that it includes more points. So this task is to calculate the hotness of all the rectangles.
 
+## Data
+The input will be a monthly taxi trip dataset from 2009 - 2012. For example, "yellow_tripdata_2009-01_point.csv", "yellow_tripdata_2010-02_point.csv"
 
 ## Inputs
 Documentation for every input and output used in the system. Each document should accompany each design and explain the purpose and use of each form.
+- **Range/Range join queries:** pointString:String, queryRectangle:String
+- **Distance/Distance join queries:** pointString1:String, pointString2:String, distance:Double
+- **Hotzone analysis:** pointString:String, queryRectangle:String
+- **Hotcell analysis:** pointString:String, queryRectangle:String
 
 ## Outputs
 

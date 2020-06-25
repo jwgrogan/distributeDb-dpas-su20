@@ -1,7 +1,7 @@
 package cse512
 
 object HotzoneUtils {
-
+  // Copied from our project milestone 4
   def ST_Contains(queryRectangle: String, pointString: String ): Boolean = {
     // get point longitude and latitude
     val point = pointString.split(",")

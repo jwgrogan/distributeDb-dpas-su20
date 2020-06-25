@@ -23,3 +23,8 @@ libraryDependencies ++= Seq(
   "org.specs2" %% "specs2-core" % "2.4.16" % "test",
   "org.specs2" %% "specs2-junit" % "2.4.16" % "test"
 )
+
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+  case x => MergeStrategy.first
+}

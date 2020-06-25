@@ -1,6 +1,6 @@
 # Distributed Db using Scala and Apache Spark
-## 1. [Spark SQL]()
-## 2. [Hotspot Analysis]()
+## 1. [Spark SQL](docs/spark-sql-pdf.pdf)
+## 2. [Hotspot Analysis](docs/hotspot-analysis-pdf.pdf)
 
 [test link](https://jwgrogan.github.io/distributeDb-dpas-su20/test.md)
 

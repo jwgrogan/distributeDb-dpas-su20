@@ -1,6 +1,6 @@
 theme: jekyll-theme-cayman
 title: CSE 511 Term Project
-description: Jake Grogan, Will Cray, Craig Manning
+description: Will Cray, Craig Manning, Jake Grogan
 relative_links:
   enabled: true
   collections: true

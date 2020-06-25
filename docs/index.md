@@ -1,7 +1,7 @@
 # Distributed Db using Scala and Apache Spark
 
 
-[test link](https://jwgrogan.github.io/distributeDb-dpas-su20/test.md)
+[test link](https://jwgrogan.github.io/distributeDb-dpas-su20/test.html)
 
 [Documentation]()
 

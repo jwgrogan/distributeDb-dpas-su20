@@ -1,9 +1,7 @@
 ---
-
+theme: jekyll-theme-cayman
+title: test
+description: don't test me bro
 layout: page
-title: "test"
 permalink: /test/
-
 ---
-
-## test

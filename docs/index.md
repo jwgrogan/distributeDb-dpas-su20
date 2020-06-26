@@ -20,7 +20,8 @@ This project encompasses a distributed database built on Scala and Apache Spark.
 ## Inputs
 Data is drawn from monthly NYC taxi trip datasets from 2009 - 2012 (e.g. "yellow_tripdata_2009-01_point.csv", "yellow_tripdata_2010-02_point.csv", etc.). These files are loaded and parsed by the code to pass inputs to the logic as described below.
 
-- **Range/Range join queries:** file line containg a point lat-long string and a rectangle lat-long String with format _pointString:String, queryRectangle:String_
+**Function** | **Description** | **Format**
+Range/Range join queries | file line containg a point lat-long string and a rectangle lat-long String |  _pointString:String, queryRectangle:String_
 - **Distance/Distance join queries:** file line containg two point lat-long Strings and a distance as Double with format _pointString1:String, pointString2:String, distance:Double_
 - **Hotzone analysis:** file line containg a point lat-long String and a rectangle lat-long String with format _pointString:String, queryRectangle:String_
 - **Hotcell analysis:** file line containg a point lat-long String and a rectangle lat-long String with format _pointString:String, queryRectangle:String_

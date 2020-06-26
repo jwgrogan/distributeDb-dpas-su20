@@ -22,12 +22,10 @@ Data is drawn from monthly NYC taxi trip datasets from 2009 - 2012 (e.g. "yellow
 
 |**Function** | **Description** | **Format** |
 | ----------- | --------------- | ---------- |
-|Range/Range join queries | file line containg a point lat-long string and a rectangle lat-long String |  pointString:String, queryRectangle:String |
-
-
-- **Distance/Distance join queries:** file line containg two point lat-long Strings and a distance as Double with format _pointString1:String, pointString2:String, distance:Double_
-- **Hotzone analysis:** file line containg a point lat-long String and a rectangle lat-long String with format _pointString:String, queryRectangle:String_
-- **Hotcell analysis:** file line containg a point lat-long String and a rectangle lat-long String with format _pointString:String, queryRectangle:String_
+|Range/<br /> Range join queries | file line containg a point lat-long string and a rectangle lat-long string |  pointString:String, queryRectangle:String |
+| Distance/<br /> Distance join queries | file line containg two point lat-long Strings and a distance as Double | pointString1:String, pointString2:String, distance:Double |
+| Hotzone analysis | file line containg a point lat-long String and a rectangle lat-long String | pointString:String, queryRectangle:String |
+| Hotcell analysis | file line containg a point lat-long String and a rectangle lat-long String | pointString:String, queryRectangle:String |
 
 ## Outputs
 

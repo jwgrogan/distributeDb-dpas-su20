@@ -17,19 +17,22 @@ This project encompasses a distributed database built on Scala and Apache Spark.
   
 2. Conduct [Hotspot Analysis](hotspot-analysis-pdf.pdf) to perform a range join operation on a rectangle datasets and a point dataset. For each rectangle, the number of points located within the rectangle will be obtained. The hotter rectangle means that it includes more points. So this task is to calculate the hotness of all the rectangles.
 
-## Data
-The input will be a monthly taxi trip dataset from 2009 - 2012. For example, "yellow_tripdata_2009-01_point.csv", "yellow_tripdata_2010-02_point.csv"
-
 ## Inputs
-Documentation for every input and output used in the system. Each document should accompany each design and explain the purpose and use of each form.
-- **Range/Range join queries:** pointString:String, queryRectangle:String
-- **Distance/Distance join queries:** pointString1:String, pointString2:String, distance:Double
-- **Hotzone analysis:** pointString:String, queryRectangle:String
-- **Hotcell analysis:** pointString:String, queryRectangle:String
+Data is drawn from monthly NYC taxi trip datasets from 2009 - 2012 (e.g. "yellow_tripdata_2009-01_point.csv", "yellow_tripdata_2010-02_point.csv", etc.). These files are loaded and parsed by the code to pass inputs to the logic as described below.
+
+- **Range/Range join queries:** file line containg a point lat-long string and a rectangle lat-long String with format _pointString:String, queryRectangle:String_
+- **Distance/Distance join queries:** file line containg two point lat-long Strings and a distance as Double with format _pointString1:String, pointString2:String, distance:Double_
+- **Hotzone analysis:** file line containg a point lat-long String and a rectangle lat-long String with format _pointString:String, queryRectangle:String_
+- **Hotcell analysis:** file line containg a point lat-long String and a rectangle lat-long String with format _pointString:String, queryRectangle:String_
 
 ## Outputs
 
-## ?
+- **Range/Range join queries:** 
+- **Distance/Distance join queries:** 
+- **Hotzone analysis:** file containing all zones identified by their lat-long coordinates and the point count per zone sorted by zone an ascending order - e.g. "-155.940114,19.081331,-155.618917,19.5307", 3
+- **Hotcell analysis:** 
+
+## need this?
 Documentation of every file of the system, creating and update sequences of the file should be there.
 
 ## Flowchart

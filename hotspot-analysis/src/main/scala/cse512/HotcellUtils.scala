@@ -48,29 +48,29 @@ object HotcellUtils {
     return calendar.get(Calendar.DAY_OF_MONTH)
   }
 
-  def checkInBounds (bounds: List[Float], pointX: Int, pointY: Int, pointZ: Int): Boolean =
+  def checkInBounds (bounds: List[Double], pointX: Int, pointY: Int, pointZ: Int): Boolean =
   {
-    var minX = bounds(0)
-    var maxX = bounds(1)
-    var minY = bounds(2)
-    var maxY = bounds(3)
-    var minZ = bounds(4)
-    var maxZ = bounds(5)
+    val minX = bounds(0)
+    val maxX = bounds(1)
+    val minY = bounds(2)
+    val maxY = bounds(3)
+    val minZ = bounds(4)
+    val maxZ = bounds(5)
 
     if (pointX >= minX && pointX <= maxX && pointY >= minY && pointY <= maxY && pointZ >= minZ && pointZ <= maxZ)
     {
-      return true
+      true
     }
     else
     {
-      return false
+      false
     }
   }
 
   // takes point in table and returns list of nearest neighbors, accounting bounds of rectangle
-  def getNeighbors (bounds: List[Float], pointX: Int, pointY: Int, pointZ: Int, count: Int): List[(Int, Int, Int)] =
+  def getNeighbors (bounds: List[Double], pointX: Int, pointY: Int, pointZ: Int, count: Int): List[(Int, Int, Int, Int)] =
   {
-    var neighbors = List.newBuilder[(Int, Int, Int)]
+    var neighbors = List.newBuilder[(Int, Int, Int, Int)]
     // iterate each possible point combination
     // each combination has the following options for each dimension: decrement, same, increment
     // iterate point list and apply modifications to each dimension
@@ -81,9 +81,9 @@ object HotcellUtils {
     {
       i match
       {
-        case 0 => x -= 1
-        case 1 => x += 1
-        case 2 => x += 1
+        case 0 => x = pointX - 1
+        case 1 => x = pointX
+        case 2 => x = pointX + 1
       }
       for (j <- 0 to 2)
       {
@@ -97,18 +97,22 @@ object HotcellUtils {
         {
           k match
           {
-            case 0 => z -= 1
-            case 1 => z += 1
-            case 2 => z += 1
+            case 0 => z = pointZ - 1
+            case 1 => z = pointZ
+            case 2 => z = pointZ + 1
           }
           // add point to neighbors list if inbounds
           if (checkInBounds(bounds, x, y, z))
           {
-            neighbors += ((x, y, z))
+            neighbors += ((x, y, z, count))
           }
         }
       }
     }
-    return neighbors.result()
+    neighbors.result()
+  }
+
+  def listToDf (l:  List[(Int, Int, Int, Int)]): Unit = {
+
   }
 }

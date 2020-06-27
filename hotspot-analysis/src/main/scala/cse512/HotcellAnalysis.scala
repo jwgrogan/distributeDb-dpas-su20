@@ -41,14 +41,43 @@ def runHotcellAnalysis(spark: SparkSession, pointPath: String): DataFrame =
   val minZ = 1
   val maxZ = 31
   val numCells = (maxX - minX + 1)*(maxY - minY + 1)*(maxZ - minZ + 1)
-
-  // YOU NEED TO CHANGE THIS PART
+  val bounds = List(minX, maxX, minY, maxY, minZ, maxZ)
+  
   pickupInfo = pickupInfo.filter(pickupInfo("x") >= minX && pickupInfo("x") <= maxX && pickupInfo("y") >= minY && pickupInfo("y") <= maxY && pickupInfo("z") >= minZ && pickupInfo("z") <= maxZ)
   pickupInfo.createOrReplaceTempView("pickupInfo")
-  val group = spark.sql("select p.x, p.y, p.z, count(*) from pickupInfo as p group by p.x, p.y, p.z order by p.x, p.y, p.z")
+  var group = spark.sql("select p.x, p.y, p.z, count(*) from pickupInfo as p group by p.x, p.y, p.z order by p.x, p.y, p.z")
   group.show()
-//  pickupInfo.groupBy(col("x"), col("y"), col("z")).select(col("x"), col("y"), col("z"), count(col("*")))
 
+  spark.udf.register("neighbors",( x: Int, y: Int, z: Int, c: Int)=>
+    HotcellUtils.getNeighbors(bounds, x, y, z, c)
+    )
+
+//  var group = pickupInfo
+//    .filter(pickupInfo("x") >= minX && pickupInfo("x") <= maxX && pickupInfo("y") >= minY && pickupInfo("y") <= maxY && pickupInfo("z") >= minZ && pickupInfo("z") <= maxZ)
+//    .orderBy("x", "y", "z")
+//    .groupBy("x", "y", "z" )
+//    .count()
+//  group.show()
+
+  group.createOrReplaceTempView("groups")
+  var neighbor = spark.sql("select *, neighbors(*) from groups")
+  neighbor.show(false)
+
+
+//  val test = group.map(x => HotcellUtils.getNeighbors(bounds, x.getAs[Int](0), x.getAs[Int](1), x.getAs[Int](2), x.getAs[Int](3) )).collect()
+
+//  group.foreach(x <- => HotcellUtils.getNeighbors(bounds, x(0),x(1), x(2),x(3)))
+//  group.collect().foreach(x => HotcellUtils.getNeighbors(bounds, x(0), x(1), x(2),x(3)))
+//  for ((x, y, z, c) <- group) {
+//
+//  }
+
+//  group.show()
+
+//  group.map(x => HotcellUtils.getNeighbors(List(minX, maxX, minY, maxY, minZ, maxZ), x(0), x(1), x(2), x(3)))
+//  val groupRdd = group.map(row => (row.x, row.y, row.z, row.c))
+//  groupRdd.reduce()
+//  groupRdd.show()
   return pickupInfo // YOU NEED TO CHANGE THIS PART
 }
 }

@@ -16,7 +16,7 @@ def runHotcellAnalysis(spark: SparkSession, pointPath: String): DataFrame =
   // Load the original data from a data source
   var pickupInfo = spark.read.format("com.databricks.spark.csv").option("delimiter",";").option("header","false").load(pointPath);
   pickupInfo.createOrReplaceTempView("nyctaxitrips")
-  pickupInfo.show()
+//  pickupInfo.show()
 
   // Assign cell coordinates based on pickup points
   spark.udf.register("CalculateX",(pickupPoint: String)=>((
@@ -31,7 +31,7 @@ def runHotcellAnalysis(spark: SparkSession, pointPath: String): DataFrame =
   pickupInfo = spark.sql("select CalculateX(nyctaxitrips._c5),CalculateY(nyctaxitrips._c5), CalculateZ(nyctaxitrips._c1) from nyctaxitrips")
   var newCoordinateName = Seq("x", "y", "z")
   pickupInfo = pickupInfo.toDF(newCoordinateName:_*)
-  pickupInfo.show()
+//  pickupInfo.show()
 
   // Define the min and max of x, y, z
   val minX = -74.50/HotcellUtils.coordinateStep
@@ -43,6 +43,11 @@ def runHotcellAnalysis(spark: SparkSession, pointPath: String): DataFrame =
   val numCells = (maxX - minX + 1)*(maxY - minY + 1)*(maxZ - minZ + 1)
 
   // YOU NEED TO CHANGE THIS PART
+  pickupInfo = pickupInfo.filter(pickupInfo("x") >= minX && pickupInfo("x") <= maxX && pickupInfo("y") >= minY && pickupInfo("y") <= maxY && pickupInfo("z") >= minZ && pickupInfo("z") <= maxZ)
+  pickupInfo.createOrReplaceTempView("pickupInfo")
+  val group = spark.sql("select p.x, p.y, p.z, count(*) from pickupInfo as p group by p.x, p.y, p.z order by p.x, p.y, p.z")
+  group.show()
+//  pickupInfo.groupBy(col("x"), col("y"), col("z")).select(col("x"), col("y"), col("z"), count(col("*")))
 
   return pickupInfo // YOU NEED TO CHANGE THIS PART
 }

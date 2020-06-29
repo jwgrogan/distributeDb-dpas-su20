@@ -42,42 +42,25 @@ def runHotcellAnalysis(spark: SparkSession, pointPath: String): DataFrame =
   val maxZ = 31
   val numCells = (maxX - minX + 1)*(maxY - minY + 1)*(maxZ - minZ + 1)
   val bounds = List(minX, maxX, minY, maxY, minZ, maxZ)
-  
+
+  // Filter out unneeded cells and count the pickups in each cell
   pickupInfo = pickupInfo.filter(pickupInfo("x") >= minX && pickupInfo("x") <= maxX && pickupInfo("y") >= minY && pickupInfo("y") <= maxY && pickupInfo("z") >= minZ && pickupInfo("z") <= maxZ)
   pickupInfo.createOrReplaceTempView("pickupInfo")
-  var group = spark.sql("select p.x, p.y, p.z, count(*) from pickupInfo as p group by p.x, p.y, p.z order by p.x, p.y, p.z")
+  var group = spark.sql("select p.x, p.y, p.z, count(*) as count from pickupInfo as p group by p.x, p.y, p.z")
   group.show()
 
-  spark.udf.register("neighbors",( x: Int, y: Int, z: Int, c: Int)=>
-    HotcellUtils.getNeighbors(bounds, x, y, z, c)
+  // Register neighbors function for SQL queries
+  spark.udf.register("neighbors",(x1: Int, y1: Int, z1: Int, x2: Int, y2: Int, z2: Int)=>
+    HotcellUtils.areNeighbors(x1, y1, z1, x2, y2, z2)
     )
 
-//  var group = pickupInfo
-//    .filter(pickupInfo("x") >= minX && pickupInfo("x") <= maxX && pickupInfo("y") >= minY && pickupInfo("y") <= maxY && pickupInfo("z") >= minZ && pickupInfo("z") <= maxZ)
-//    .orderBy("x", "y", "z")
-//    .groupBy("x", "y", "z" )
-//    .count()
-//  group.show()
-
+  // Calculate each neighbor of each cell
+  // Note: cells with zero pickups are NOT included
   group.createOrReplaceTempView("groups")
-  var neighbor = spark.sql("select *, neighbors(*) from groups")
-  neighbor.show(false)
+  var neighbor = spark.sql("select g1.x, g1.y, g1.z, g1.count, g2.x as x2, g2.y as y2, g2.z as z2, g2.count as c2 from groups as g1, groups as g2 where neighbors(g1.x, g1.y, g1.z, g2.x, g2.y, g2.z) order by g1.x, g1.y, g1.z")
+  neighbor.show(100)
 
-
-//  val test = group.map(x => HotcellUtils.getNeighbors(bounds, x.getAs[Int](0), x.getAs[Int](1), x.getAs[Int](2), x.getAs[Int](3) )).collect()
-
-//  group.foreach(x <- => HotcellUtils.getNeighbors(bounds, x(0),x(1), x(2),x(3)))
-//  group.collect().foreach(x => HotcellUtils.getNeighbors(bounds, x(0), x(1), x(2),x(3)))
-//  for ((x, y, z, c) <- group) {
-//
-//  }
-
-//  group.show()
-
-//  group.map(x => HotcellUtils.getNeighbors(List(minX, maxX, minY, maxY, minZ, maxZ), x(0), x(1), x(2), x(3)))
-//  val groupRdd = group.map(row => (row.x, row.y, row.z, row.c))
-//  groupRdd.reduce()
-//  groupRdd.show()
+  // TODO Calculate Gi*
   return pickupInfo // YOU NEED TO CHANGE THIS PART
 }
 }

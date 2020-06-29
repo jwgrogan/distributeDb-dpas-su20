@@ -68,43 +68,43 @@ object HotcellUtils {
   }
 
   // takes point in table and returns list of nearest neighbors, accounting bounds of rectangle
-  def getNeighbors (bounds: List[Double], pointX: Int, pointY: Int, pointZ: Int, count: Int): List[(Int, Int, Int, Int)] =
+  def getNeighbors (bounds: List[Double], p: (Int, Int, Int, BigInt)): List[(Int, Int, Int, BigInt)] =
   {
-    var neighbors = List.newBuilder[(Int, Int, Int, Int)]
+    var neighbors = List.newBuilder[(Int, Int, Int, BigInt)]
     // iterate each possible point combination
     // each combination has the following options for each dimension: decrement, same, increment
     // iterate point list and apply modifications to each dimension
-    var x = pointX
-    var y = pointY
-    var z = pointZ
+    var x = p._1
+    var y = p._2
+    var z = p._3
     for (i <- 0 to 2)
     {
       i match
       {
-        case 0 => x = pointX - 1
-        case 1 => x = pointX
-        case 2 => x = pointX + 1
+        case 0 => x = p._1 - 1
+        case 1 => x = p._1
+        case 2 => x = p._1 + 1
       }
       for (j <- 0 to 2)
       {
         j match
         {
-          case 0 => y -= 1
-          case 1 => y += 1
-          case 2 => y += 1
+          case 0 => y -= p._2 - 1
+          case 1 => y += p._2
+          case 2 => y += p._2 + 1
         }
         for (k <- 0 to 2)
         {
           k match
           {
-            case 0 => z = pointZ - 1
-            case 1 => z = pointZ
-            case 2 => z = pointZ + 1
+            case 0 => z = p._3 - 1
+            case 1 => z = p._3
+            case 2 => z = p._3 + 1
           }
           // add point to neighbors list if inbounds
           if (checkInBounds(bounds, x, y, z))
           {
-            neighbors += ((x, y, z, count))
+            neighbors += ((x, y, z, p._4))
           }
         }
       }
@@ -112,7 +112,19 @@ object HotcellUtils {
     neighbors.result()
   }
 
-  def listToDf (l:  List[(Int, Int, Int, Int)]): Unit = {
+  // Determine if two cells are neighbors
+  def areNeighbors (x1: Int, y1: Int, z1: Int, x2: Int, y2: Int, z2: Int): Boolean = {
 
+    // To be a neighbor, a cell2's coordinate must be within +/- 1 along each axis relative to cell1
+    // Eliminate cells that aren't neighbors by checking if they're outside each axis' limits
+    if (x2 > x1 + 1 || x2 < x1 - 1)
+      return false
+    if (y2 > y1 + 1 || y2 < y1 - 1)
+      return false
+    if (z2 > z1 + 1 || z2 < z1 - 1)
+      return false
+
+    // If all coordinates are within the bounds, then cell2 is a neighbor of cell1
+    true
   }
 }

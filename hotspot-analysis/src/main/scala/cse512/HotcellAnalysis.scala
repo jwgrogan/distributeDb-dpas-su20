@@ -57,7 +57,7 @@ def runHotcellAnalysis(spark: SparkSession, pointPath: String): DataFrame =
   // Calculate each neighbor of each cell
   // Note: cells with zero pickups are NOT included
   group.createOrReplaceTempView("groups")
-  var neighbor = spark.sql("select g1.x, g1.y, g1.z, g1.count, g2.x as x2, g2.y as y2, g2.z as z2, g2.count as c2 from groups as g1, groups as g2 where neighbors(g1.x, g1.y, g1.z, g2.x, g2.y, g2.z) order by g1.x, g1.y, g1.z")
+  var neighbor = spark.sql("select g1.x, g1.y, g1.z, g1.count, g2.x as x2, g2.y as y2, g2.z as z2, g2.count as c2 from groups as g1, groups as g2 where neighbors(g1.x, g1.y, g1.z, g2.x, g2.y, g2.z)")
   neighbor.show(100)
 
   // TODO Calculate Gi*

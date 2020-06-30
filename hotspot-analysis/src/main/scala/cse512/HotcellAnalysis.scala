@@ -59,8 +59,27 @@ def runHotcellAnalysis(spark: SparkSession, pointPath: String): DataFrame =
   group.createOrReplaceTempView("groups")
   var neighbor = spark.sql("select g1.x, g1.y, g1.z, g1.count, g2.x as x2, g2.y as y2, g2.z as z2, g2.count as c2 from groups as g1, groups as g2 where neighbors(g1.x, g1.y, g1.z, g2.x, g2.y, g2.z)")
   neighbor.show(100)
+  neighbor.createOrReplaceTempView("neighbor_table")
 
   // TODO Calculate Gi*
+
+  // get x_bar table
+  // TODO: this is an invalid calculation; we need to update it to assume that n outside
+  // of a summation is the total number of points
+  val x_bar = spark.sql("select x, y, z, (sum(c2) / count(c2)) as x_bar from neighbor_table group by x, y, z")
+  x_bar.show()
+  x_bar.createOrReplaceTempView("x_bar_table")
+
+  // get S table
+  // val std_dev = spark.sql("select x, y, z, sqrt((sum(power(c2, 2)) / count(c2)) - power((sum(c2) / count(c2), 2)) from neighbor_table group by x, y, z")
+  // std_dev.show()
+
+  // get Gi table
+
+  // join Gi table with groups, order by Gi
+
+  // return top 50 rows
+
   return pickupInfo // YOU NEED TO CHANGE THIS PART
 }
 }

@@ -68,9 +68,9 @@ object HotcellUtils {
   }
 
   // takes point in table and returns list of nearest neighbors, accounting bounds of rectangle
-  def getNeighbors (bounds: List[Double], p: (Int, Int, Int, BigInt)): List[(Int, Int, Int, BigInt)] =
+  def getNeighborCount (bounds: List[Double], p: (Int, Int, Int)): Int =
   {
-    var neighbors = List.newBuilder[(Int, Int, Int, BigInt)]
+    var neighborCount = 0
     // iterate each possible point combination
     // each combination has the following options for each dimension: decrement, same, increment
     // iterate point list and apply modifications to each dimension
@@ -89,9 +89,9 @@ object HotcellUtils {
       {
         j match
         {
-          case 0 => y -= p._2 - 1
-          case 1 => y += p._2
-          case 2 => y += p._2 + 1
+          case 0 => y = p._2 - 1
+          case 1 => y = p._2
+          case 2 => y = p._2 + 1
         }
         for (k <- 0 to 2)
         {
@@ -104,12 +104,12 @@ object HotcellUtils {
           // add point to neighbors list if inbounds
           if (checkInBounds(bounds, x, y, z))
           {
-            neighbors += ((x, y, z, p._4))
+            neighborCount += 1
           }
         }
       }
     }
-    neighbors.result()
+    neighborCount
   }
 
   // Determine if two cells are neighbors
@@ -126,5 +126,9 @@ object HotcellUtils {
 
     // If all coordinates are within the bounds, then cell2 is a neighbor of cell1
     true
+  }
+
+  def calculateGi (xi_sum : Int, wi_sum: Int, X_bar: Double, S: Double, n: Double): Double = {
+    (xi_sum - X_bar * wi_sum) / (S * math.sqrt((n * wi_sum - math.pow(wi_sum, 2.0)) / (n - 1)))
   }
 }

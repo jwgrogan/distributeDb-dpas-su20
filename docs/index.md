@@ -1,7 +1,7 @@
 # Distributed Db using Scala and Apache Spark
 
 
-[test link](test.md)
+[Test Link](test.md)
 
 [Documentation]()
 
@@ -51,9 +51,13 @@ Data is drawn from monthly NYC taxi trip datasets from 2009 - 2012 (e.g. "yellow
 - **Hotzone analysis:** file containing all zones identified by their lat-long coordinates and the point count per zone sorted by zone an ascending order - e.g. "-155.940114,19.081331,-155.618917,19.5307", 3
 - **Hotcell analysis:** 
 
-## need this?
-Documentation of every file of the system, creating and update sequences of the file should be there.
-
 ## Flowchart
 System flowchart describing the series of steps used in the processing of data.
 
+## Questions
+* What are the performance tradeoffs between using a `cross-join` on a Spark dataframe versus a `map` and `reduce` call? H
+* How would this tradeoff be affected on a true distributed compute architecture vs. testing on a development machine?
+* What would the implementation look like in Hadoop? Would it be more difficult to implement?
+
+## Not doing
+As of the time of this writing, all tasks have been completed. There is not further work planned.

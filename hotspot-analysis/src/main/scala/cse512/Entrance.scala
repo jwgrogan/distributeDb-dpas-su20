@@ -2,12 +2,16 @@ package cse512
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}
+//import org.apache.spark.sql.Encoders
 
 object Entrance extends App {
   Logger.getLogger("org.spark_project").setLevel(Level.WARN)
   Logger.getLogger("org.apache").setLevel(Level.WARN)
   Logger.getLogger("akka").setLevel(Level.WARN)
   Logger.getLogger("com").setLevel(Level.WARN)
+
+//  class xyzc(x: Int, y: Int, z: Int, c: Int)
+//  val xyzcEncoder = Encoders.product[xyzc]
 
   override def main(args: Array[String]) {
     val spark = SparkSession

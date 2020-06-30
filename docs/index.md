@@ -5,6 +5,14 @@
 
 [Documentation]()
 
+## Roles
+# Craig Manning
+Craig Manning made several key contributions throughout the entirety of the project. He wrote the `ST_Within()` function, resolved the primary problems with the Hotzone Analysis, and pioneered the MapReduce approach used in the Hotcell Analysis.
+# Jake Grogan
+Jake Grogan made major contributions to the process in `HotzoneAnalysis.scala`, found bugs in `HotzoneUtils.scala`, and helped resolve the key calculations behind the Getis-Ord statistic.
+# Will Cray
+Will Cray wrote the `ST_Contains()` funciton. He wrote two `HotzoneUtils.scala` member functions used to calculate the number of neighbors for a given point, and he helped resolve a working algorithm for the required z-scores.
+
 ## Overview
 This project encompasses a distributed database built on Scala and Apache Spark. The purpose of this database is two fold as described below.
 

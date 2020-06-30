@@ -55,7 +55,7 @@ Data is drawn from monthly NYC taxi trip datasets from 2009 - 2012 (e.g. "yellow
 System flowchart describing the series of steps used in the processing of data.
 
 ## Questions
-* What are the performance tradeoffs between using a `cross-join` on a Spark dataframe versus a `map` and `reduce` call? H
+* What are the performance tradeoffs between using a `cross-join` on a Spark dataframe versus a `map` and `reduce` call?
 * How would this tradeoff be affected on a true distributed compute architecture vs. testing on a development machine?
 * What would the implementation look like in Hadoop? Would it be more difficult to implement?
 

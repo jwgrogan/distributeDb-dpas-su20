@@ -34,6 +34,9 @@ This project encompasses a distributed database built on Scala and Apache Spark.
 ## Assumptions
 The underlying assumption in these algorithms is that meaningful data processing on GIS data only occurs at scale. The amount of GIS data is increasing rapidly, so it's imperative that the team leverages a distributed compute environment, such as that provided by Spark.
 
+## Acceptance Criteria
+The tasks are presumed to be accomplished when the tests are successfully passed. The work beyond this is to ensure clean, quality, and efficient code that is both fast and easily-understandable for anyone in the organization to interpret.
+
 ## Inputs
 Data is drawn from monthly NYC taxi trip datasets from 2009 - 2012 (e.g. "yellow_tripdata_2009-01_point.csv", "yellow_tripdata_2010-02_point.csv", etc.). These files are loaded and parsed by the code to pass inputs to the logic as described below.
 

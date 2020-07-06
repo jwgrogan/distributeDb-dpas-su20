@@ -1,0 +1,13 @@
+2020.07.01 16:16:13 INFO  started: Metals version 0.9.1 in workspace 'C:\Users\jagrogan\OneDrive - Microsoft\projects\distributeDb-dpas-su20'
+2020.07.01 16:16:15 INFO  time: initialize in 1.84s
+2020.07.01 16:16:16 WARN  no build tool detected in workspace 'C:\Users\jagrogan\OneDrive - Microsoft\projects\distributeDb-dpas-su20'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2020.07.02 15:06:38 INFO  shutting down Metals
+2020.07.02 21:06:43 INFO  started: Metals version 0.9.1 in workspace 'C:\Users\jagrogan\OneDrive - Microsoft\projects\distributeDb-dpas-su20'
+2020.07.02 21:06:44 INFO  time: initialize in 1.67s
+2020.07.02 21:06:45 WARN  no build tool detected in workspace 'C:\Users\jagrogan\OneDrive - Microsoft\projects\distributeDb-dpas-su20'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2020.07.02 21:06:45 INFO  no build target: using presentation compiler with only scala-library
+2020.07.02 21:06:49 WARN  no build target for: C:\Users\jagrogan\OneDrive - Microsoft\projects\distributeDb-dpas-su20\hotspot-analysis\src\main\scala\cse512\HotzoneAnalysis.scala
+2020.07.02 21:07:00 WARN  no build target for: C:\Users\jagrogan\OneDrive - Microsoft\projects\distributeDb-dpas-su20\hotspot-analysis\src\main\scala\cse512\HotzoneUtils.scala
+2020.07.02 21:07:09 WARN  no build target for: C:\Users\jagrogan\OneDrive - Microsoft\projects\distributeDb-dpas-su20\hotspot-analysis\src\main\scala\cse512\HotcellUtils.scala
+2020.07.05 15:55:53 WARN  no build target for: C:\Users\jagrogan\OneDrive - Microsoft\projects\distributeDb-dpas-su20\hotspot-analysis\src\main\scala\cse512\HotcellAnalysis.scala
+2020.07.05 15:55:58 WARN  no build target for: C:\Users\jagrogan\OneDrive - Microsoft\projects\distributeDb-dpas-su20\hotspot-analysis\src\main\scala\cse512\HotzoneAnalysis.scala
